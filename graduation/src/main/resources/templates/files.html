@@ -174,23 +174,6 @@
 
 
 <script src="webjars/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    layui.use('element', function () {
-        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
-        element.init();
-    });
-</script>
-<script>
-    layui.use('element', function(){
-        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
-
-        //监听导航点击
-        element.on('nav(demo)', function(elem){
-            //console.log(elem)
-            layer.msg(elem.text());
-        });
-    });
-</script>
 <link href="webjars/bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
 <script src="webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
 <script src="webjars/vue/2.6.11/vue.min.js"></script>
