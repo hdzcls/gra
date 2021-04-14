@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LiuShuai</title>
+    <base th:href="${#request.getContextPath()}+'/'">
+</head>
+<link rel="stylesheet" href="layui/css/layui.css" media="all">
+<script src="layui/layui.js" charset="utf-8"></script>
+
+<body>
+<div class="layui-layout layui-layout-admin"  id="person">
+
+    <div class="layui-header header header-demo" spring>
+        <div class="layui-fluid">
+            <div style="float: left">
+                <a class="logo" href="content/index">
+                    <img src="image/logo.png" alt="liushuai">
+                </a>
+            </div>
+
+            <div class="layui-form component" lay-filter="LAY-site-header-component"></div>
+            <div style="float: right">
+                <ul class="layui-nav">
+                    <li class="layui-nav-item">
+                        <a href="">个人待办<span class="layui-badge" th:text="${#request.getSession().getAttribute('event')}"></span></a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="">个人中心<span class="layui-badge-dot"></span></a>
+                    </li>
+                    <li class="layui-nav-item" lay-unselect="">
+                        <a href="javascript:;" th:text="${#request.getSession().getAttribute('name')}"></a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;">修改密码</a></dd>
+                            <dd><a href="logout">登出</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree site-demo-nav" lay-filter="test">
+                <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+                <li class="layui-nav-item layui-nav-itemed"><a href="content/index">首页</a></li>
+                <li class="layui-nav-item layui-this"><a href="content/needs">需求</a></li>
+                <li class="layui-nav-item"><a href="content/tests">测试用例</a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">人员管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="content/person/developer">开发人员</a></dd>
+                        <dd><a href="content/person/tester">测试人员</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="content/files">文档管理</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
+        <div class="layui-body layui-tab-content site-demo site-demo-body">
+            <div class="layui-tab-item layui-show">
+                <div class="layui-main">
+                    </br>
+                    </br>
+                    <div>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <button type="button" class="btn btn-success" @click="addFun"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                    </svg>&nbsp;添加需求</button>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="输入需求名查找......" ref="getname">
+                                        <span class="input-group-btn">
+
+                                            <button class="btn btn-info" type="button" @click="search"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+</svg>&nbsp;&nbsp;查询</button>
+      </span>
+                                    </div><!-- /input-group -->
+                                </div><!-- /.col-lg-6 -->
+                                </br>
+                                </br>
+                                </br>
+                                </br>
+                            </div>
+
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-hover table-bordered">
+                                            <tr>
+                                                <td>编号</td>
+                                                <td>名称</td>
+                                                <td>模块</td>
+                                                <td>功能</td>
+                                                <td>录入人</td>
+                                                <td>开发人</td>
+                                                <td>当前状态</td>
+                                                <td>操作</td>
+                                            </tr>
+                                            <tr v-for="item in msg">
+                                                <td>{{item.id}}</td>
+                                                <td>{{item.name}}</td>
+                                                <td>{{item.module}}</td>
+                                                <td>{{item.function}}</td>
+                                                <td>{{item.writer}}</td>
+                                                <td>{{item.developer}}</td>
+                                                <td>{{item.state}}</td>
+                                                <td>
+                                                    <!--                                                    <input type="button" class="btn btn-primary" value="成员" @click="">-->
+                                                    <button class="btn btn-warning"
+                                                            @click="updateFun(item.id)">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                                        </svg>&nbsp;修改
+                                                    </button>
+                                                    <button class="btn btn-danger"
+                                                            @click="deleteFun(item.id)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+                                                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                    </svg>&nbsp;删除</button></td>
+                                                <!--<input type="button" value="修改" class="btn btn-info" @click="updateProject(item.id)">-->
+
+
+                                            </tr>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myModal02" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">修改需求</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                </div>
+                <form action="content/needs/updateNeeds" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label"> 编号:</label>
+                            <input  type="text" class="form-control" name="id" :value="back.id" readonly="readonly">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label"> 名称:</label>
+                            <input  type="text" class="form-control" name="name" :value="back.name" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label"> 模块:</label>
+                            <input  type="text" class="form-control" name="module" :value="back.module" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">功能：</label>
+                            <input  type="text" class="form-control" name="function" :value="back.function" required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">具体描述：</label>
+                            <textarea rows="3" cols="20" class="form-control" name="explain" required="required" :value="back.explain">
+                            </textarea>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">开发人：</label>
+                            <select class="form-control" name="developer">
+                                <option>{{back.developer}}</option>
+                                <option v-for="item in developer">{{item.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">状态：</label>
+                            <input type="text" class="form-control" name="workage" :value="back.state" required="required" readonly="readonly">
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">关闭</button>
+                        <button type="submit" class="btn btn-primary">提交</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">添加需求</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                </div>
+                <form action="content/needs/addNeeds" method="post">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label"> 名称:</label>
+                            <input type="text" class="form-control" name="name" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">模块：</label>
+                            <input type="text" class="form-control" name="module" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">功能：</label>
+                            <input type="text" class="form-control" name="function" ref="getlogname" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">具体描述：</label>
+                            <textarea rows="3" cols="20" class="form-control" name="explain" required="required">
+                            </textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">开发人：</label>
+                            <select class="form-control" name="developer">
+                                <option value="-1">--请选择--</option>
+                                <option v-for="item in developer">{{item.name}}</option>
+                            </select>
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-default">重置</button>
+                        <button type="submit" class="btn btn-primary" >提交</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</div>
+
+
+<script src="webjars/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    layui.use('element', function () {
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+        element.init();
+    });
+</script>
+<script>
+    layui.use('element', function(){
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
+<link href="webjars/bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+<script src="webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+<script src="webjars/vue/2.6.11/vue.min.js"></script>
+<script src="webjars/axios/dist/axios.min.js"></script>
+<script>
+    var cc=false;
+    function check() {
+        if (cc==false){
+            alert("登录名已经存在！");
+        }
+
+        return cc;
+
+    };
+    var project=new Vue({
+        el:"#person",
+        data:{
+            msg:[],
+            list:[],
+            back:[],
+            getback:[],
+            uid:null,
+            developer:[]
+        },
+        methods: {
+            findAll: function () {
+                var that = this;
+                axios.get("content/needs/findAllNeeds").then(function (response) {
+                    that.msg = response.data;
+                    console.log(response);
+
+                })
+            },
+            addFun: function () {
+                $("#myModal").modal();
+
+            },
+            checkLogname: function(e) {
+                var logname=this.$refs.getlogname.value;
+                axios.get("content/person/check?logname="+logname).then(function (response) {
+                    console.log(response.data);
+
+                    if (response.data==false){
+                        alert("登录名已经存在！");
+                    }
+                    cc=response.data;
+
+
+                });
+
+            },
+            deleteFun:function (uid) {
+                var that=this;
+                var c=confirm("您确定要删除该需求的所有信息吗？")
+                if(c){
+                    axios.get("content/needs/deleteNeeds?id="+uid).then(function () {
+                        alert("删除成功");
+                        that.search();
+
+                    })}else {
+                    return false;
+                }
+
+            },
+            updateFun:function(id){
+                $("#myModal02").modal();
+                var that=this;
+                axios.get("content/needs/findById?id="+id).then(function (response) {
+                    console.log(response.data["id"]);
+                    that.back=response.data;
+
+                })
+
+            },
+            search: function () {
+                var name = this.$refs.getname.value;
+                var that=this;
+                axios.get("content/needs/searchneeds?name=" + name).then(function (response) {
+                    that.msg = response.data;
+
+                })
+
+            },
+            findAllDeveloper: function () {
+                var that = this;
+                axios.get("content/person/findAllDeveloper").then(function (response) {
+                    that.developer = response.data;
+                    console.log(response);
+
+                })
+            }
+        },
+
+
+        mounted(){
+            this.findAll();
+            this.findAllDeveloper();
+        }
+    })
+</script>
+<script>
+    layui.use('element', function () {
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+        element.init();
+    });
+</script>
+<script>
+    layui.use('element', function(){
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
+
+</body>
+</html>

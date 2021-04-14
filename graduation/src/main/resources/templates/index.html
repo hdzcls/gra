@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LiuShuai</title>
+    <base th:href="${#request.getContextPath()}+'/'">
+    <script src="webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="echarts/echarts.min.js"></script>
+</head>
+<link rel="stylesheet" href="layui/css/layui.css" media="all">
+<script src="layui/layui.js" charset="utf-8"></script>
+
+
+<body>
+<div class="layui-layout layui-layout-admin">
+
+    <div class="layui-header header header-demo" spring>
+        <div class="layui-fluid">
+            <div style="float: left">
+                <a class="logo" href="content/index">
+                    <img src="image/logo.png" alt="liushuai">
+                </a>
+            </div>
+
+        <div class="layui-form component" lay-filter="LAY-site-header-component"></div>
+            <div style="float: right">
+                <ul class="layui-nav">
+                <li class="layui-nav-item">
+                    <a href="">个人待办<span class="layui-badge" th:text="${#request.getSession().getAttribute('event')}">0</span></a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">个人中心<span class="layui-badge-dot"></span></a>
+                </li>
+                <li class="layui-nav-item" lay-unselect="">
+                    <a href="javascript:;" th:text="${#request.getSession().getAttribute('name')}"></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">修改密码</a></dd>
+                        <dd><a href="logout">登出</a></dd>
+                    </dl>
+                </li>
+            </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree site-demo-nav" lay-filter="test">
+                <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+                <li class="layui-nav-item layui-nav-itemed layui-this"><a href="content/index">首页</a></li>
+                <li class="layui-nav-item"><a href="content/needs">需求</a></li>
+                <li class="layui-nav-item"><a href="content/tests">测试用例</a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">人员管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="content/person/developer">开发人员</a></dd>
+                        <dd><a href="content/person/tester">测试人员</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="content/files">文档管理</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
+        <div class="layui-body layui-tab-content site-demo site-demo-body">
+            <div class="layui-tab-item layui-show">
+                <div class="layui-main">
+                    <div class="container-fluid">
+                        <div class="row">
+                    <div id="main" style="width: 600px;height:400px" class="col"></div>
+                    <script type="text/javascript">
+
+
+                         $.get('content/index/person').done(function (data) {
+
+
+
+                            var chartDom = document.getElementById('main');
+                            var myChart = echarts.init(chartDom);
+                            var option;
+
+                            option = {
+                                title: {
+                                    text: '当前人员类型分布',
+                                    left: 'center'
+                                },
+                                tooltip: {
+                                    trigger: 'item'
+                                },
+                                legend: {
+                                    orient: 'vertical',
+                                    left: 'left',
+                                },
+                                series: [
+                                    {
+                                        name: '人员类型',
+                                        type: 'pie',
+                                        radius: '50%',
+                                        data: data,
+                                        emphasis: {
+                                            itemStyle: {
+                                                shadowBlur: 10,
+                                                shadowOffsetX: 0,
+                                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                            }
+                                        }
+                                    }
+                                ]
+                            };
+                             myChart.hideLoading();
+
+                            option && myChart.setOption(option);
+                         });
+
+                        // 使用刚指定的配置项和数据显示图表。
+                        // myChart.setOption(option);
+                    </script>
+                    <div id="main1" style="width: 600px;height:400px" class="col"></div>
+                    <script type="text/javascript">
+                        $.get('content/index/developeSpeed').done(function (data) {
+
+
+                        // 基于准备好的dom，初始化echarts实例
+                        var chartDom = document.getElementById('main1');
+                        var myChart = echarts.init(chartDom);
+                        var option;
+
+                        option = {
+                            title: {
+                                text: '当前开发进度',
+                                left: 'center'
+                            },
+                            series: [{
+                                type: 'gauge',
+                                progress: {
+                                    show: true,
+                                    width: 18
+                                },
+                                axisLine: {
+                                    lineStyle: {
+                                        width: 18
+                                    }
+                                },
+                                axisTick: {
+                                    show: false
+                                },
+                                splitLine: {
+                                    length: 15,
+                                    lineStyle: {
+                                        width: 2,
+                                        color: '#999'
+                                    }
+                                },
+                                axisLabel: {
+                                    distance: 25,
+                                    color: '#999',
+                                    fontSize: 20
+                                },
+                                anchor: {
+                                    show: true,
+                                    showAbove: true,
+                                    size: 25,
+                                    itemStyle: {
+                                        borderWidth: 10
+                                    }
+                                },
+                                title: {
+                                    show: false
+                                },
+                                detail: {
+                                    valueAnimation: true,
+                                    fontSize: 80,
+                                    offsetCenter: [0, '90%']
+                                },
+                                data: [{
+                                    value: data
+                                }]
+                            }]
+                        };
+                            option && myChart.setOption(option);
+                        });
+
+
+                    </script>
+                        </div>
+                        <div class="row">
+                            <div id="main3" style="width: 600px;height:400px" class="col"></div>
+                            <script type="text/javascript">
+
+
+                                $.get('content/index/listAll').done(function (data) {
+                                    console.log(data[0])
+
+
+
+                                    var chartDom = document.getElementById('main3');
+                                    var myChart = echarts.init(chartDom);
+                                    var option;
+
+                                    option = {
+                                        title: {
+                                            text: '项目概览',
+                                            subtext: '截至目前'
+                                        },
+                                        tooltip: {
+                                            trigger: 'axis',
+                                            axisPointer: {
+                                                type: 'shadow'
+                                            }
+                                        },
+                                        legend: {
+                                            data: ['未开始', '正在进行','已结束']
+                                        },
+                                        grid: {
+                                            left: '3%',
+                                            right: '4%',
+                                            bottom: '3%',
+                                            containLabel: true
+                                        },
+                                        xAxis: {
+                                            type: 'value',
+                                            boundaryGap: [0, 0.01]
+                                        },
+                                        yAxis: {
+                                            type: 'category',
+                                            data: [ '功能测试', '项目需求']
+                                        },
+                                        series: [
+                                            {
+                                                name: '未开始',
+                                                type: 'bar',
+                                                data: data[0]
+                                            },
+                                            {
+                                                name: '正在进行',
+                                                type: 'bar',
+                                                data: data[1]
+                                            },
+                                            {
+                                                name: '已结束',
+                                                type: 'bar',
+                                                data: data[2]
+                                            }
+                                        ]
+                                    };
+                                    myChart.hideLoading();
+
+                                    option && myChart.setOption(option);
+                                });
+
+                                // 使用刚指定的配置项和数据显示图表。
+                                // myChart.setOption(option);
+                            </script>
+                            <div id="main4" style="width: 600px;height:400px" class="col"></div>
+                            <script type="text/javascript">
+                                $.get('content/index/testSpeed').done(function (data) {
+
+
+                                    // 基于准备好的dom，初始化echarts实例
+                                    var chartDom = document.getElementById('main4');
+                                    var myChart = echarts.init(chartDom);
+                                    var option;
+
+                                    option = {
+                                        title: {
+                                            text: '当前测试进度',
+                                            left: 'center'
+                                        },
+                                        series: [{
+                                            type: 'gauge',
+                                            progress: {
+                                                show: true,
+                                                width: 18
+                                            },
+                                            axisLine: {
+                                                lineStyle: {
+                                                    width: 18
+                                                }
+                                            },
+                                            axisTick: {
+                                                show: false
+                                            },
+                                            splitLine: {
+                                                length: 15,
+                                                lineStyle: {
+                                                    width: 2,
+                                                    color: '#999'
+                                                }
+                                            },
+                                            axisLabel: {
+                                                distance: 25,
+                                                color: '#999',
+                                                fontSize: 20
+                                            },
+                                            anchor: {
+                                                show: true,
+                                                showAbove: true,
+                                                size: 25,
+                                                itemStyle: {
+                                                    borderWidth: 10
+                                                }
+                                            },
+                                            title: {
+                                                show: false
+                                            },
+                                            detail: {
+                                                valueAnimation: true,
+                                                fontSize: 80,
+                                                offsetCenter: [0, '90%']
+                                            },
+                                            data: [{
+                                                value: data
+                                            }]
+                                        }]
+                                    };
+                                    option && myChart.setOption(option);
+                                });
+
+
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    layui.use('element', function () {
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+        element.init();
+    });
+</script>
+<link href="webjars/bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+<script src="webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+<script>
+    layui.use('element', function(){
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
+</body>
+</html>
