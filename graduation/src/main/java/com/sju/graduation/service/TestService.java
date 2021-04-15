@@ -32,7 +32,8 @@ public class TestService {
         testMapper.addTest(test);
         if(!test.getTester().equals("-1")){
         Integer tid=testMapper.findIdByName(test.getName());
-        Integer pid=personMapper.findIdByName(test.getTester());
+        String tester=test.getTester();
+        Integer pid=personMapper.findIdByName(tester);
         testMapper.addpt(pid,tid);
         }
 
@@ -51,5 +52,17 @@ public class TestService {
     }
     public Test findTestById(int id){
         return testMapper.findTestById(id);
+    }
+    public List<Test> findPersonalTest(int id){
+        return testMapper.findPersonalTest(id);
+    }
+    public Integer countPersonalTest(int id){
+        return testMapper.countPersonalTest(id);
+    }
+    public void startTest(int id){
+        testMapper.startTest(id);
+    }
+    public void endTest(int id){
+        testMapper.endTest(id);
     }
 }

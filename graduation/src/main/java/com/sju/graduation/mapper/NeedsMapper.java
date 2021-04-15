@@ -1,6 +1,7 @@
 package com.sju.graduation.mapper;
 
 import com.sju.graduation.pojo.Needs;
+import com.sju.graduation.pojo.Test;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -37,4 +38,12 @@ public interface NeedsMapper {
     public Integer needscount1();
     @Select("select count(1) from pn where state=2")
     public Integer needscount2();
+    @Select("select needs.*,pn.state from pn,needs where pn.nid=needs.id and pn.state!=2 and pn.pid=#{id}")
+    public List<Needs> findPersonalNeed(int id);
+    @Select("select count(1) from pn,needs where pn.nid=needs.id and pn.state!=2 and pn.pid=#{id}")
+    public Integer countPersonalNeed(int id);
+    @Update("update pn set state=1 where nid=#{id}")
+    public void startNeed(int id);
+    @Update("update pn set state=2 where nid=#{id}")
+    public void endNeed(int id);
 }

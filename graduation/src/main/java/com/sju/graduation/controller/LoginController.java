@@ -29,7 +29,11 @@ public class LoginController {
             if (p.equals(password)) {
                 request.getSession().setAttribute("person", person);
                 request.getSession().setAttribute("name", logname);
-                request.getSession().setAttribute("event", 3);
+                Integer event=personService.countPersonalTask(person.getRole(),person.getId());
+                if(event==null){
+                    event=0;
+                }
+                request.getSession().setAttribute("event", event);
                 return "redirect:/content/index";
             } else {
                 map.put("message", "密码错误！");

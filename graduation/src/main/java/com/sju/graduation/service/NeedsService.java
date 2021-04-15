@@ -52,5 +52,18 @@ public class NeedsService {
         }
 
     }
+    public List<Needs> findPersonalNeed(int id){
+        return needsMapper.findPersonalNeed(id);
+    }
+    public Integer countPersonalNeed(int id){
+        return needsMapper.countPersonalNeed(id);
+    }
+    public void startNeed(int id){
+        needsMapper.startNeed(id);
+    }
+    public void endNeed(int id){
+        needsMapper.endNeed(id);
+    }
+
 
 }

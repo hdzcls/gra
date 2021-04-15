@@ -23,7 +23,8 @@
             <div style="float: right">
                 <ul class="layui-nav">
                     <li class="layui-nav-item">
-                        <a href="">个人待办<span class="layui-badge" th:text="${#request.getSession().getAttribute('event')}"></span></a>
+                        <a href="content/todoTask">个人待办<span class="layui-badge"
+                                             th:text="${#request.getSession().getAttribute('event')}"></span></a>
                     </li>
                     <li class="layui-nav-item">
                         <a href="">个人中心<span class="layui-badge-dot"></span></a>
@@ -69,14 +70,18 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-3">
-                                    <button type="button" class="btn btn-success" @click="addFun"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
-                                        <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/>
-                                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
-                                    </svg>&nbsp;上传文件</button>
+                                    <button type="button" class="btn btn-success" @click="addFun">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
+                                            <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/>
+                                            <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                                        </svg>&nbsp;上传文件
+                                    </button>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="输入文件名查找......" ref="getname">
+                                        <input type="text" class="form-control" placeholder="输入文件名查找......"
+                                               ref="getname">
                                         <span class="input-group-btn">
 
                                             <button class="btn btn-info" type="button" @click="search"><svg
@@ -115,16 +120,23 @@
                                                     <!--                                                    <input type="button" class="btn btn-primary" value="成员" @click="">-->
                                                     <button class="btn btn-primary"
                                                             @click="downloadFun(item.name)">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                             fill="currentColor" class="bi bi-file-earmark-arrow-down"
+                                                             viewBox="0 0 16 16">
                                                             <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V6.5z"/>
                                                             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
                                                         </svg>&nbsp;下载
                                                     </button>
                                                     <button class="btn btn-danger"
-                                                            @click="deleteFun(item.id)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-minus" viewBox="0 0 16 16">
-                                                        <path d="M5.5 9a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
-                                                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
-                                                    </svg>&nbsp;删除</button></td>
+                                                            @click="deleteFun(item.id)">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                             fill="currentColor" class="bi bi-file-earmark-minus"
+                                                             viewBox="0 0 16 16">
+                                                            <path d="M5.5 9a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+                                                            <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                                                        </svg>&nbsp;删除
+                                                    </button>
+                                                </td>
                                                 <!--<input type="button" value="修改" class="btn btn-info" @click="updateProject(item.id)">-->
 
 
@@ -147,7 +159,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">上传文件</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
 
                 </div>
                 <form action="content/files/fileUpload" method="post" enctype="multipart/form-data">
@@ -157,8 +170,6 @@
                             <label for="recipient-name" class="control-label"> 上传:</label>
                             <input type="file" name="fileName" required="required" @change="checkFiles()" ref="getFile">
                         </div>
-
-
 
 
                     </div>
@@ -179,25 +190,26 @@
 <script src="webjars/vue/2.6.11/vue.min.js"></script>
 <script src="webjars/axios/dist/axios.min.js"></script>
 <script>
-    var cc=false;
+    var cc = false;
+
     function check() {
-        if (cc==false){
+        if (cc == false) {
             alert("请选择文件！");
         }
 
         return cc;
 
     };
-    var project=new Vue({
-        el:"#files",
-        data:{
-            msg:[],
-            list:[],
-            back:[],
-            getback:[],
-            uid:null,
-            tester:[],
-            needs:[]
+    var project = new Vue({
+        el: "#files",
+        data: {
+            msg: [],
+            list: [],
+            back: [],
+            getback: [],
+            uid: null,
+            tester: [],
+            needs: []
         },
         methods: {
             findAll: function () {
@@ -212,54 +224,56 @@
                 $("#myModal").modal();
 
             },
-            checkFiles: function(e) {
-                var name=this.$refs.getFile.value;
+            checkFiles: function (e) {
+                var name = this.$refs.getFile.value;
                 var params = new URLSearchParams()
                 params.append('name', name)
-                var that=this;
+                var that = this;
                 console.log(name);
-                axios.post("content/files/checkFiles",params,{
-                    headers:{
-                        'Access-control-Allow-Origin':'*'
+                axios.post("content/files/checkFiles", params, {
+                    headers: {
+                        'Access-control-Allow-Origin': '*'
                     }
                 }).then(function (response) {
                     cc = response.data;
-                    if(!cc){
-                        alert("该文件已存在!");}
+                    if (!cc) {
+                        alert("该文件已存在!");
+                    }
 
                     console.log(cc);
 
                 })
 
 
-
             },
-            deleteFun:function (uid) {
-                var that=this;
-                var c=confirm("您确定要删除该文档吗？")
-                if(c){
-                    axios.get("content/files/deleteFiles?id="+uid).then(function () {
+            deleteFun: function (uid) {
+                var that = this;
+                var c = confirm("您确定要删除该文档吗？")
+                if (c) {
+                    axios.get("content/files/deleteFiles?id=" + uid).then(function () {
                         alert("删除成功");
                         that.search();
 
-                    })}else {
+                    })
+                } else {
                     return false;
                 }
 
             },
-            downloadFun:function(name){
-                var that=this;
-                window.location.href = "content/files/download?name="+name;
-                setTimeout(function (){that.search();},500);
+            downloadFun: function (name) {
+                var that = this;
+                window.location.href = "content/files/download?name=" + name;
+                setTimeout(function () {
+                    that.search();
+                }, 500);
                 alert(111);
                 alert("我是测试");
-
 
 
             },
             search: function () {
                 var name = this.$refs.getname.value;
-                var that=this;
+                var that = this;
                 axios.get("content/files/findFilesByName?name=" + name).then(function (response) {
                     that.msg = response.data;
 
@@ -285,7 +299,7 @@
         },
 
 
-        mounted(){
+        mounted() {
             this.findAll();
             this.findAllTester();
             this.findAllNeeds();
@@ -299,11 +313,11 @@
     });
 </script>
 <script>
-    layui.use('element', function(){
+    layui.use('element', function () {
         var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
 
         //监听导航点击
-        element.on('nav(demo)', function(elem){
+        element.on('nav(demo)', function (elem) {
             //console.log(elem)
             layer.msg(elem.text());
         });
