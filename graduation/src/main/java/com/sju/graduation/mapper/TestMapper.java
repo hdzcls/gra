@@ -38,9 +38,9 @@ public interface TestMapper {
     public Integer testcount1();
     @Select("select count(1) from pt where state=2")
     public Integer testcount2();
-    @Select("select test.*,pt.state from pt,test where pt.tid=test.id and pt.state!=2 and pt.pid=#{id}")
+    @Select("select test.*,pt.state from pt,test,needs,pn where pt.tid=test.id and test.need_name=needs.`name` and pn.nid=needs.id and  pt.state!=2 and pn.state=2 and pt.pid=#{id}")
     public List<Test> findPersonalTest(int id);
-    @Select("select count(1) from pt,test where pt.tid=test.id and pt.state!=2 and pt.pid=#{id}")
+    @Select("select count(1) from pt,test,needs,pn where pt.tid=test.id and test.need_name=needs.`name` and pn.nid=needs.id and  pt.state!=2 and pn.state=2 and pt.pid=#{id}")
     public Integer countPersonalTest(int id);
     @Update("update pt set state=1 where tid=#{id}")
     public void startTest(int id);
