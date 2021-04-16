@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LiuShuai</title>
+    <base th:href="${#request.getContextPath()}+'/'">
+    <script src="webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="echarts/echarts.min.js"></script>
+</head>
+<link rel="stylesheet" href="layui/css/layui.css" media="all">
+<script src="layui/layui.js" charset="utf-8"></script>
+
+
+<body>
+<div class="layui-layout layui-layout-admin" id="testertodo">
+
+    <div class="layui-header header header-demo" spring>
+        <div class="layui-fluid">
+            <div style="float: left">
+                <a class="logo" href="content/index">
+                    <img src="image/logo.png" alt="liushuai">
+                </a>
+            </div>
+
+            <div class="layui-form component" lay-filter="LAY-site-header-component"></div>
+            <div style="float: right">
+                <ul class="layui-nav">
+                    <li class="layui-nav-item layui-this">
+                        <a href="content/todoTask">个人待办<span class="layui-badge" th:text="${#request.getSession().getAttribute('event')}">0</span></a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="">个人中心<span class="layui-badge-dot"></span></a>
+                    </li>
+                    <li class="layui-nav-item" lay-unselect="">
+                        <a href="javascript:;" th:text="${#request.getSession().getAttribute('name')}"></a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;">修改密码</a></dd>
+                            <dd><a href="logout">登出</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree site-demo-nav" lay-filter="test">
+                <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+                <li class="layui-nav-item layui-nav-itemed"><a href="content/index">首页</a></li>
+                <li class="layui-nav-item"><a href="content/needs">需求</a></li>
+                <li class="layui-nav-item"><a href="content/tests">测试用例</a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">人员管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="content/person/developer">开发人员</a></dd>
+                        <dd><a href="content/person/tester">测试人员</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="content/files">文档管理</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
+        <div class="layui-body layui-tab-content site-demo site-demo-body">
+            <div class="layui-tab-item layui-show">
+                <div class="layui-main">
+                    </br>
+                    </br>
+                    <div>
+
+                        <div class="container">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-hover table-bordered">
+                                            <tr>
+                                                <td>编号</td>
+                                                <td>名称</td>
+                                                <td>需求名</td>
+                                                <td>用例</td>
+                                                <td>录入人</td>
+                                                <td>当前状态</td>
+                                                <td>操作</td>
+                                            </tr>
+                                            <tr v-for="item in msg">
+                                                <td>{{item.id}}</td>
+                                                <td>{{item.name}}</td>
+                                                <td>{{item.needName}}</td>
+                                                <td>{{item.content}}</td>
+                                                <td>{{item.writer}}</td>
+                                                <td>{{item.state}}</td>
+                                                <td>
+                                                    <!--                                                    <input type="button" class="btn btn-primary" value="成员" @click="">-->
+                                                    <button class="btn btn-info" v-if="item.state==0"
+                                                            @click="startFun(item.id)">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
+                                                            <path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/>
+                                                        </svg>&nbsp;开始
+                                                    </button>
+                                                    <button class="btn btn-success" v-else
+                                                            @click="endFun(item.id)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                                    </svg> 完成</button></td>
+                                                <!--<input type="button" value="修改" class="btn btn-info" @click="updateProject(item.id)">-->
+
+
+                                            </tr>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</script>
+<link href="webjars/bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+<script src="webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+<script src="webjars/vue/2.6.11/vue.min.js"></script>
+<script src="webjars/axios/dist/axios.min.js"></script>
+<script>
+    var cc=false;
+    function check() {
+        if (cc==false){
+            alert("请选择需求名！");
+        }
+
+        return cc;
+
+    };
+    var project=new Vue({
+        el:"#testertodo",
+        data:{
+            msg:[],
+            list:[],
+            back:[],
+            getback:[],
+            uid:null,
+            tester:[],
+            needs:[]
+        },
+        methods: {
+            findAll: function () {
+                var that = this;
+                axios.get("content/todo/findPersonalToDo").then(function (response) {
+                    that.msg = response.data;
+                    console.log(response);
+
+                })
+            },
+            startFun:function(id){
+                var that=this;
+                axios.get("content/todo/startTask?id="+id).then(function (response) {
+                    that.findAll();
+
+                })
+
+            },
+            endFun:function(id){
+                var that=this;
+                axios.get("content/todo/endTask?id="+id).then(function (response) {
+
+                    location.reload();
+
+                })
+
+            }
+        },
+
+
+        mounted(){
+            this.findAll();
+
+        }
+    })
+</script>
+<script>
+    layui.use('element', function () {
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+        element.init();
+    });
+</script>
+<script>
+    layui.use('element', function(){
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
+
+</body>
+</html>
