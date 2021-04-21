@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -34,7 +35,10 @@ public class LoginController {
                     event=0;
                 }
                 request.getSession().setAttribute("event", event);
-                return "redirect:/content/index";
+                if (password.equals("123456")){
+                    return "redirect:/content/change/password";
+                }else {
+                return "redirect:/content/index";}
             } else {
                 map.put("message", "密码错误！");
                 return "login";
@@ -46,9 +50,26 @@ public class LoginController {
         }
     }
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request){
+    public String logout(HttpServletRequest request,Map map){
         request.getSession().removeAttribute("name");
         request.getSession().removeAttribute("person");
         return "login";
+    }
+    @GetMapping("/content/change/password")
+    public String changePage(HttpServletRequest request,Map map){
+        Person person=(Person) request.getSession().getAttribute("person");
+        if(person.getPassword().equals("123456")){
+        map.put("changeMessage","初次登录请修改密码");}
+        return "changePassword";
+    }
+    @PostMapping("/content/changePassword")
+    public String changePassword(HttpServletRequest request,Map map){
+        String password=(String)request.getParameter("newpassword");
+        Person person=(Person)request.getSession().getAttribute("person");
+        int id=person.getId();
+        personService.changePassword(password,id);
+        map.put("message","修改成功，请重新登陆！");
+        return "login";
+
     }
 }

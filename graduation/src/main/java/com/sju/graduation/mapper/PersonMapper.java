@@ -31,5 +31,7 @@ public interface PersonMapper {
     public void deleteptPerson(int id);
     @Update("update person set name=#{name},age=#{age},phone=#{phone},workage=#{workage} where id=#{id}")
     public void updatePerson(Person person);
+    @Update("update person set password=#{password} where id=#{id}")
+    public void changePassword(String password,int id);
 
 }
