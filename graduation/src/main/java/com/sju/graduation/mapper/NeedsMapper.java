@@ -38,7 +38,7 @@ public interface NeedsMapper {
     public Integer needscount1();
     @Select("select count(1) from pn where state=2")
     public Integer needscount2();
-    @Select("select needs.*,pn.state from pn,needs where pn.nid=needs.id and pn.state!=2 and pn.pid=#{id}")
+    @Select("select needs.*,pn.state,pn.back from pn,needs where pn.nid=needs.id and pn.state!=2 and pn.pid=#{id}")
     public List<Needs> findPersonalNeed(int id);
     @Select("select count(1) from pn,needs where pn.nid=needs.id and pn.state!=2 and pn.pid=#{id}")
     public Integer countPersonalNeed(int id);

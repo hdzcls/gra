@@ -1,5 +1,6 @@
 package com.sju.graduation.controller;
 
+import com.sju.graduation.pojo.Needs;
 import com.sju.graduation.pojo.Person;
 import com.sju.graduation.pojo.Test;
 import com.sju.graduation.service.NeedsService;
@@ -37,7 +38,9 @@ public class ToDoController {
         int role=person.getRole();
         int id=person.getId();
         if(role==1){
-            return needsService.findPersonalNeed(id);
+            List<Needs> list=needsService.findPersonalNeed(id);
+            return list;
+//            return needsService.findPersonalNeed(id);
         }else {
             return testService.findPersonalTest(id);
         }

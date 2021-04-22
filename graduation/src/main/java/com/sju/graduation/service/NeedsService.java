@@ -29,7 +29,7 @@ public class NeedsService {
         needsMapper.addNeeds(needs);
         String pname=needs.getDeveloper();
         if(!pname.equals("-1")){
-            Integer nid=needsMapper.findId(needs.getname());
+            Integer nid=needsMapper.findId(needs.getName());
             Integer pid=personMapper.findIdByName(pname);
             needsMapper.addpn(pid,nid);
         }
