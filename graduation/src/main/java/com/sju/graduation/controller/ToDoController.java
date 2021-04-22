@@ -9,6 +9,7 @@ import com.sju.graduation.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -70,4 +71,18 @@ public class ToDoController {
 
 
     }
+    @PostMapping("content/todo/back")
+    public String back(HttpServletRequest request){
+        Person person=(Person) request.getSession().getAttribute("person");
+        int role=person.getRole();
+        String sid=request.getParameter("id");
+        Integer id=Integer.parseInt(sid);
+        String back=request.getParameter("back");
+        String needName=request.getParameter("needName");
+        Integer nid=needsService.findId(needName);
+        needsService.back(back,nid);
+        personService.endTask(role,id);
+        return "testerToDo";
+    }
+
 }
