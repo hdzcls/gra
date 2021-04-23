@@ -38,7 +38,7 @@ public interface NeedsMapper {
     public Integer needscount1();
     @Select("select count(1) from pn where state=2")
     public Integer needscount2();
-    @Select("select needs.*,pn.state,pn.back from pn,needs where pn.nid=needs.id and pn.state!=2 and pn.pid=#{id}")
+    @Select("select needs.*,(case pn.state when 1 then '正在开发' else '未开始' end) as state,pn.back from pn,needs where pn.nid=needs.id and pn.state!=2 and pn.pid=#{id}")
     public List<Needs> findPersonalNeed(int id);
     @Select("select count(1) from pn,needs where pn.nid=needs.id and pn.state!=2 and pn.pid=#{id}")
     public Integer countPersonalNeed(int id);
@@ -46,4 +46,7 @@ public interface NeedsMapper {
     public void startNeed(int id);
     @Update("update pn set state=2 where nid=#{id}")
     public void endNeed(int id);
+    @Update("update pn set back=#{back},state=0 where nid=#{id}")
+    public void back(String back,int id);
+
 }

@@ -64,6 +64,13 @@ public class NeedsService {
     public void endNeed(int id){
         needsMapper.endNeed(id);
     }
+    public void back(String back,int id){
+        needsMapper.back(back,id);
+    }
+    public Integer findId(String name){
+        return needsMapper.findId(name);
+    }
+
 
 
 }

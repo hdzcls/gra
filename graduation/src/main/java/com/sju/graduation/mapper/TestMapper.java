@@ -8,11 +8,11 @@ import java.util.List;
 
 @Mapper
 public interface TestMapper {
-    @Select("select test.*,(select name from person where id=pt.pid) as tester,(case pt.state when 2 then '已经结束' when 1 then '正在开发' else '未开始' end) as state  from test left join pt on test.id=pt.tid")
+    @Select("select test.*,(select name from person where id=pt.pid) as tester,(case pt.state when 2 then '已经结束' when 1 then '正在测试' else '未开始' end) as state  from test left join pt on test.id=pt.tid")
     public List<Test> findAllTest();
-    @Select("select test.*,(select name from person where id=pt.pid) as tester,(case pt.state when 2 then '已经结束' when 1 then '正在开发' else '未开始' end) as state  from test left join pt on test.id=pt.tid where test.name like #{name}")
+    @Select("select test.*,(select name from person where id=pt.pid) as tester,(case pt.state when 2 then '已经结束' when 1 then '正在测试' else '未开始' end) as state  from test left join pt on test.id=pt.tid where test.name like #{name}")
     public List<Test> findLikeTest(String name);
-    @Select("select test.*,(select name from person where id=pt.pid) as tester,(case pt.state when 2 then '已经结束' when 1 then '正在开发' else '未开始' end) as state  from test left join pt on test.id=pt.tid where test.id=#{id}")
+    @Select("select test.*,(select name from person where id=pt.pid) as tester,(case pt.state when 2 then '已经结束' when 1 then '正在测试' else '未开始' end) as state  from test left join pt on test.id=pt.tid where test.id=#{id}")
     public Test findTestById(int id);
     @Select("select id from test where name=#{name}")
     public Integer findIdByName(String name);
@@ -38,7 +38,7 @@ public interface TestMapper {
     public Integer testcount1();
     @Select("select count(1) from pt where state=2")
     public Integer testcount2();
-    @Select("select test.*,pt.state from pt,test,needs,pn where pt.tid=test.id and test.need_name=needs.`name` and pn.nid=needs.id and  pt.state!=2 and pn.state=2 and pt.pid=#{id}")
+    @Select("select test.*,(case pt.state when 2 then '已经结束' when 1 then '正在测试' else '未开始' end) as state from pt,test,needs,pn where pt.tid=test.id and test.need_name=needs.`name` and pn.nid=needs.id and  pt.state!=2 and pn.state=2 and pt.pid=#{id}")
     public List<Test> findPersonalTest(int id);
     @Select("select count(1) from pt,test,needs,pn where pt.tid=test.id and test.need_name=needs.`name` and pn.nid=needs.id and  pt.state!=2 and pn.state=2 and pt.pid=#{id}")
     public Integer countPersonalTest(int id);
