@@ -2,6 +2,7 @@ package com.sju.graduation.controller;
 
 import com.sju.graduation.pojo.FilesLiu;
 import com.sju.graduation.service.FilesLiuService;
+import com.sju.graduation.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,8 @@ import java.util.List;
 @Controller
 public class FilesController {
     @Autowired
+    private LogService logService;
+    @Autowired
     private FilesLiuService filesLiuService;
     @GetMapping("/content/files")
     public String files(){
@@ -28,7 +31,10 @@ public class FilesController {
     @RequestMapping("/content/files/deleteFiles")
     @ResponseBody
     public boolean deleteFiles(int id){
+        String name=filesLiuService.findFilesName(id);
         filesLiuService.deleteFiles(id);
+        String action="删除了《"+name+"》";
+        logService.insertLog(action);
         return true;
     }
 
@@ -75,7 +81,11 @@ public class FilesController {
             dest.getParentFile().mkdir();
         }
         try {
+            //日志
+            String action="上传了《"+fileName+"》";
+            logService.insertLog(action);
             file.transferTo(dest); //保存文件
+            //写入数据库
             FilesLiu filesLiu=new FilesLiu();
             filesLiu.setName(fileName);
             String name=(String)request.getSession().getAttribute("name");
@@ -96,6 +106,8 @@ public class FilesController {
     }
     @RequestMapping("/content/files/download")
     public String downLoad(String name,HttpServletResponse response) throws UnsupportedEncodingException {
+        String action="下载了《"+name+"》";
+        logService.insertLog(action);
         String filename=name;
         String filePath = "D:/test" ;
         File file = new File(filePath + "/" + filename);

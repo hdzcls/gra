@@ -29,6 +29,7 @@ public class LoginController {
             String p=person.getPassword();
             if (p.equals(password)) {
                 request.getSession().setAttribute("person", person);
+                request.getSession().setAttribute("perName", person.getName());
                 request.getSession().setAttribute("name", logname);
                 Integer event=personService.countPersonalTask(person.getRole(),person.getId());
                 if(event==null){

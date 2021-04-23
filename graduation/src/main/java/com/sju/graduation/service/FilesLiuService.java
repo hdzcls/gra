@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 @Service
 public class FilesLiuService {
@@ -30,5 +31,8 @@ public class FilesLiuService {
     }
     public Integer checkFiles(String name){
         return filesLiuMapper.checkFiles(name);
+    }
+    public String findFilesName(int id){
+        return filesLiuMapper.findFilesName(id);
     }
 }
