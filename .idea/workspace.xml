@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a36f426f-daf8-443a-87f1-035cee6e1033" name="Default Changelist" comment="2021.4。23 页面" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\repo" />
+        <option name="mavenHome" value="D:\apache-maven-3.6.3" />
+        <option name="userSettingsFile" value="D:\repository\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1r9Q294eY5IDTlvkiLUlgCNLeKK" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ChangesTree.GroupingKeys" value="module&#10;directory" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/graduation/src/main/resources/templates" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\刘帅\IdeaProjects\gra\graduation\src\main\resources\templates" />
+      <recent name="C:\Users\刘帅\IdeaProjects\gra\graduation\src\main\resources\static\image" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GraduationApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="graduation" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.sju.graduation.GraduationApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a36f426f-daf8-443a-87f1-035cee6e1033" name="Default Changelist" comment="" />
+      <created>1618385615984</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1618385615984</updated>
+      <workItem from="1618385617278" duration="5374000" />
+      <workItem from="1618450898760" duration="18256000" />
+      <workItem from="1618535677770" duration="4541000" />
+      <workItem from="1618794322735" duration="3307000" />
+      <workItem from="1618880838057" duration="12339000" />
+      <workItem from="1618965765142" duration="3761000" />
+      <workItem from="1619080756930" duration="4028000" />
+      <workItem from="1619140410872" duration="14751000" />
+      <workItem from="1619181400308" duration="916000" />
+      <workItem from="1619182338962" duration="1512000" />
+    </task>
+    <task id="LOCAL-00001" summary="test">
+      <created>1618385918840</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1618385918840</updated>
+    </task>
+    <task id="LOCAL-00002" summary="2222">
+      <created>1618386248691</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1618386248691</updated>
+    </task>
+    <task id="LOCAL-00003" summary="页面下拉bug">
+      <created>1618389900372</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1618389900372</updated>
+    </task>
+    <task id="LOCAL-00004" summary="2021.4.15">
+      <created>1618479673437</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1618479673437</updated>
+    </task>
+    <task id="LOCAL-00005" summary="2021.4.16">
+      <created>1618536455575</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1618536455575</updated>
+    </task>
+    <task id="LOCAL-00006" summary="2021.4.16  2">
+      <created>1618557374777</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1618557374777</updated>
+    </task>
+    <task id="LOCAL-00007" summary="2021.4。21  修改密码">
+      <created>1618965835575</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1618965835575</updated>
+    </task>
+    <task id="LOCAL-00008" summary="2021.4。21  修改密码">
+      <created>1618965899100</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1618965899100</updated>
+    </task>
+    <task id="LOCAL-00009" summary="2021.4。22 bug">
+      <created>1619084411969</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1619084411969</updated>
+    </task>
+    <task id="LOCAL-00010" summary="2021.4。23 页面">
+      <created>1619181716510</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1619181716510</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test" />
+    <MESSAGE value="2222" />
+    <MESSAGE value="页面下拉bug" />
+    <MESSAGE value="2021.4.15" />
+    <MESSAGE value="2021.4.16" />
+    <MESSAGE value="2021.4.16  2" />
+    <MESSAGE value="2021.4。21  修改密码" />
+    <MESSAGE value="2021.4。22 bug" />
+    <MESSAGE value="2021.4。23 页面" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021.4。23 页面" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/graduation/src/main/java/com/sju/graduation/controller/ModuleController.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.apache.catalina.connector.RequestFacade" memberName="request" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+</project>
