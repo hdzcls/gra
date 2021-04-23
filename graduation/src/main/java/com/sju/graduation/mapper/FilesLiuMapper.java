@@ -13,6 +13,8 @@ public interface FilesLiuMapper {
     public Integer checkFiles(String name);
     @Select("select * from files where name like #{name}")
     public List<FilesLiu> findFilesByName(String name);
+    @Select("select name from files where id=#{id}")
+    public String findFilesName(int id);
     @Insert("Insert into files(name,date,writer) values(#{name},#{date},#{writer})")
     public void addFiles(FilesLiu filesLiu);
     @Update("update files set times=(times+1) where name=#{name}")
