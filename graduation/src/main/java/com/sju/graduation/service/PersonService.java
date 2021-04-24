@@ -69,6 +69,9 @@ public class PersonService {
     public void changePassword(String password,int id){
         personMapper.changePassword(password,id);
     }
+    public Person findById(int id){
+        return personMapper.findById(id);
+    }
 
 
 

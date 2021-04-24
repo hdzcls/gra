@@ -2,6 +2,7 @@ package com.sju.graduation.controller;
 
 import com.sju.graduation.pojo.Person;
 import com.sju.graduation.pojo.Test;
+import com.sju.graduation.service.LogService;
 import com.sju.graduation.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import java.util.List;
 
 @Controller
 public class TestsController {
+    @Autowired
+    private LogService logService;
     @Autowired
     private TestService testService;
     @GetMapping("/content/tests")
@@ -33,11 +36,16 @@ public class TestsController {
     @GetMapping("/content/tests/deleteTests")
     @ResponseBody
     public boolean deleteTests(int id){
+        Test test=testService.findTestById(id);
+        String action="删除了<"+test.getName()+">测试用例";
+        logService.insertLog(action);
         testService.deleteTest(id);
         return true;
     }
     @PostMapping("/content/tests/addTests")
     public String addTests(Test test, HttpServletRequest request){
+        String action="添加了<"+test.getName()+">测试用例";
+        logService.insertLog(action);
         Person person=(Person) request.getSession().getAttribute("person");
         test.setWriter(person.getName());
         testService.addTest(test);
@@ -47,6 +55,8 @@ public class TestsController {
     @PostMapping("/content/tests/updateTests")
     public String updateTests(Test test){
         String content=test.getContent();
+        String action="修改了<"+test.getName()+">测试用例";
+        logService.insertLog(action);
         testService.updateTest(test);
 
         return "redirect:/content/tests";

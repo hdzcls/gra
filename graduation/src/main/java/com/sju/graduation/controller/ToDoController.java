@@ -3,6 +3,7 @@ package com.sju.graduation.controller;
 import com.sju.graduation.pojo.Needs;
 import com.sju.graduation.pojo.Person;
 import com.sju.graduation.pojo.Test;
+import com.sju.graduation.service.LogService;
 import com.sju.graduation.service.NeedsService;
 import com.sju.graduation.service.PersonService;
 import com.sju.graduation.service.TestService;
@@ -18,6 +19,8 @@ import java.util.List;
 @Controller
 public class ToDoController {
     @Autowired
+    private LogService logService;
+    @Autowired
     private NeedsService needsService;
     @Autowired
     private TestService testService;
@@ -29,8 +32,7 @@ public class ToDoController {
         if (person!=null&&person.getRole()==1){
             return "developerToDo";}
         else{
-            return "testerToDo";
-    }
+            return "testerToDo"; }
     }
     @GetMapping("/content/todo/findPersonalToDo")
     @ResponseBody
@@ -41,13 +43,8 @@ public class ToDoController {
         if(role==1){
             List<Needs> list=needsService.findPersonalNeed(id);
             return list;
-//            return needsService.findPersonalNeed(id);
         }else {
-            return testService.findPersonalTest(id);
-        }
-
-
-
+            return testService.findPersonalTest(id); }
     }
     @GetMapping("/content/todo/startTask")
     @ResponseBody
@@ -56,20 +53,18 @@ public class ToDoController {
         int role=person.getRole();
         personService.startTask(role,id);
         return true;
-
-
-
     }
     @GetMapping("/content/todo/endTask")
     @ResponseBody
     public boolean endTask(HttpServletRequest request,int id){
         Person person=(Person) request.getSession().getAttribute("person");
         int role=person.getRole();
+        if(role==2){
+            Test test=testService.findTestById(id);
+            String action="测试<"+test.getNeedName()+">需求为通过";
+        }
         personService.endTask(role,id);
         return true;
-
-
-
     }
     @PostMapping("content/todo/back")
     public String back(HttpServletRequest request){

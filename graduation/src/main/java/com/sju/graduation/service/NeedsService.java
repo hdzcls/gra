@@ -11,6 +11,8 @@ import java.util.List;
 @Service
 public class NeedsService {
     @Autowired
+    private LogService logService;
+    @Autowired
     private PersonMapper personMapper;
     @Autowired
     private NeedsMapper needsMapper;
@@ -59,12 +61,22 @@ public class NeedsService {
         return needsMapper.countPersonalNeed(id);
     }
     public void startNeed(int id){
+        Needs needs=this.findNeedById(id);
+        String action="开始开发<"+needs.getName()+">需求";
+        logService.insertLog(action);
         needsMapper.startNeed(id);
     }
     public void endNeed(int id){
+
+        Needs needs=this.findNeedById(id);
+        String action="结束开发<"+needs.getName()+">需求";
+        logService.insertLog(action);
         needsMapper.endNeed(id);
     }
     public void back(String back,int id){
+        Needs needs=this.findNeedById(id);
+        String action="测试<"+needs.getName()+">需求为未通过";
+        logService.insertLog(action);
         needsMapper.back(back,id);
     }
     public Integer findId(String name){

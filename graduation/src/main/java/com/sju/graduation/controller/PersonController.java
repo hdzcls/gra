@@ -2,6 +2,7 @@ package com.sju.graduation.controller;
 
 import com.sju.graduation.mapper.PersonMapper;
 import com.sju.graduation.pojo.Person;
+import com.sju.graduation.service.LogService;
 import com.sju.graduation.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import java.util.List;
 
 @Controller
 public class PersonController {
+    @Autowired
+    private LogService logService;
     @Autowired
     private PersonService personService;
     @GetMapping("/content/person/tester")
@@ -36,11 +39,15 @@ public class PersonController {
     }
     @PostMapping("/content/person/addDeveloper")
     public String addDeveloper(@Validated Person person){
+        String action="添加了<"+person.getName()+">开发人员";
+        logService.insertLog(action);
         personService.addPserson(person,1);
         return "redirect:/content/person/developer";
     }
     @PostMapping("/content/person/addTester")
     public String addTester(@Validated Person person){
+        String action="添加了<"+person.getName()+">测试人员";
+        logService.insertLog(action);
         personService.addPserson(person,2);
         return "redirect:/content/person/tester";
     }
@@ -57,6 +64,15 @@ public class PersonController {
     @GetMapping("/content/person/delete")
     @ResponseBody
     public boolean delete(int id){
+        Person person=personService.findById(id);
+        String p;
+        if(person.getRole()==1){
+            p="开发人员";
+        }else {
+            p="测试人员";
+        }
+        String action="删除了<"+person.getName()+">"+p;
+        logService.insertLog(action);
         personService.deletePerson(id);
         return true;
     }
@@ -69,6 +85,15 @@ public class PersonController {
     }
     @PostMapping("/content/person/updatedeveloper")
     public String updateDeveloper(Person person){
+        Person person1=personService.findById(person.getId());
+        String p;
+        if(person1.getRole()==1){
+            p="开发人员";
+        }else {
+            p="测试人员";
+        }
+        String action="修改了<"+person1.getName()+">"+p;
+        logService.insertLog(action);
         personService.updatePerson(person);
         return "redirect:/content/person/developer";
 

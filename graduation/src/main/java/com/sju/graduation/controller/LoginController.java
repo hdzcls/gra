@@ -42,9 +42,7 @@ public class LoginController {
                 return "redirect:/content/index";}
             } else {
                 map.put("message", "密码错误！");
-                return "login";
-
-            }
+                return "login"; }
         } else {
             map.put("message", "该用户不存在！");
             return "login";

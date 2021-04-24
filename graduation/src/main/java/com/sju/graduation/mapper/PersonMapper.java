@@ -33,5 +33,6 @@ public interface PersonMapper {
     public void updatePerson(Person person);
     @Update("update person set password=#{password} where id=#{id}")
     public void changePassword(String password,int id);
-
+    @Select("select * from person where id=#{id}")
+    public Person findById(int id);
 }

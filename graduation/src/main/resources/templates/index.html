@@ -12,7 +12,7 @@
 
 
 <body>
-<div class="layui-layout layui-layout-admin">
+<div class="layui-layout layui-layout-admin" id="index">
 
     <div class="layui-header header header-demo" spring>
         <div class="layui-fluid">
@@ -68,6 +68,14 @@
             <div class="layui-tab-item layui-show">
                 <div class="layui-main">
                     <div class="container-fluid">
+                        <div class="row">
+                            <div style="width: 600px;height:80px;" class="col"><h2 style="text-align: center" th:text="项目名：+${project.getName()}"></h2></div>
+                            <div style="width: 600px;height:80px" class="col"><h2 style="text-align: center" th:text="开始：+${project.getStart()}"></h2></div>
+                            <div style="width: 600px;height:80px" class="col"><h2 style="text-align: center" th:text="结束：+${project.getEnd()}"></h2></div>
+                            <div style="width: 600px;height:80px" class="col"><h2 style="text-align: center" th:text="目标：+${project.getTarget() }"></h2></div>
+                            <div style="width: 600px;height:80px" class="col"><button class="btn btn-info" onclick="change()">修改</button></div>
+
+                        </div>
                         <div class="row">
                     <div id="main" style="width: 600px;height:400px" class="col"></div>
                     <script type="text/javascript">
@@ -326,6 +334,46 @@
             </div>
         </div>
     </div>
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">修改项目信息</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                </div>
+                <form action="content/index/update" method="post">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label"> 项目名:</label>
+                            <input type="text" class="form-control" name="name" required="required" th:value="${project.getName}">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">开始：</label>
+                            <input type="date" class="form-control" name="start" required="required" th:value="${project.getStart()}" >
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">结束：</label>
+                            <input type="date" class="form-control" name="end"  required="required" th:value="${project.getEnd()}">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">目标：</label>
+                            <input type="text" class="form-control" name="target" required="required" th:value="${project.getTarget()}">
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-default">重置</button>
+                        <button type="submit" class="btn btn-primary" onclick="return check()">提交</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
 </div>
 
 
@@ -337,6 +385,16 @@
 </script>
 <link href="webjars/bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
 <script src="webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+
+<script>
+
+            var change=function () {
+                $("#myModal").modal();
+            }
+
+
+
+</script>
 <script>
     layui.use('element', function(){
         var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块

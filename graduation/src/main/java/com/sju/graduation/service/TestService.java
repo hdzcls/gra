@@ -12,6 +12,8 @@ import java.util.List;
 @Service
 public class TestService {
     @Autowired
+    private LogService logService;
+    @Autowired
     private TestMapper testMapper;
     @Autowired
     private NeedsMapper needsMapper;
@@ -60,9 +62,15 @@ public class TestService {
         return testMapper.countPersonalTest(id);
     }
     public void startTest(int id){
+        Test test=this.findTestById(id);
+        String action="开始测试<"+test.getName()+">用例";
+        logService.insertLog(action);
         testMapper.startTest(id);
     }
     public void endTest(int id){
+        Test test=this.findTestById(id);
+        String action="完成测试<"+test.getName()+">用例";
+        logService.insertLog(action);
         testMapper.endTest(id);
     }
 }

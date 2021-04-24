@@ -119,7 +119,6 @@ public class FilesController {
             byte[] buffer = new byte[1024];
             FileInputStream fis = null; //文件输入流
             BufferedInputStream bis = null;
-
             OutputStream os = null; //输出流
             try {
                 os = response.getOutputStream();
