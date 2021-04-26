@@ -1,6 +1,9 @@
 package com.sju.graduation.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sju.graduation.mapper.PersonMapper;
+import com.sju.graduation.pojo.Needs;
 import com.sju.graduation.pojo.Person;
 import com.sju.graduation.service.LogService;
 import com.sju.graduation.service.PersonService;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -106,13 +110,25 @@ public class PersonController {
     }
     @GetMapping("/content/person/searchtester")
     @ResponseBody
-    public List<Person> serchertester(String name){
-        return personService.findByName(name,2);
+    public List serchertester(String name,int pageNum){
+        PageHelper.startPage(pageNum,10);
+        List<Person> list=personService.findByName(name,2);
+        PageInfo<Person> info=new PageInfo<Person>(list);
+        List list1=new LinkedList();
+        list1.add(list);
+        list1.add(info);
+        return list1;
     }
     @GetMapping("/content/person/searchdeveloper")
     @ResponseBody
-    public List<Person> sercherdeveloper(String name){
-        return personService.findByName(name,1);
+    public List sercherdeveloper(String name,int pageNum){
+        PageHelper.startPage(pageNum,10);
+        List<Person> list=personService.findByName(name,1);
+        PageInfo<Person> info=new PageInfo<Person>(list);
+        List list1=new LinkedList();
+        list1.add(list);
+        list1.add(info);
+        return list1;
     }
 
 

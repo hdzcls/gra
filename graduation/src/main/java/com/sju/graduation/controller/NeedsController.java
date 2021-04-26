@@ -1,5 +1,7 @@
 package com.sju.graduation.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sju.graduation.pojo.Module;
 import com.sju.graduation.pojo.Needs;
 import com.sju.graduation.pojo.Person;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -31,8 +34,15 @@ public class NeedsController {
     }
     @GetMapping("/content/needs/searchneeds")
     @ResponseBody
-    public List<Needs> findNeedsByName(String name){
-        return needsService.findNeedsByName(name);
+    public List findNeedsByName(String name,int pageNum){
+        PageHelper.startPage(pageNum,10);
+        List<Needs> list=needsService.findNeedsByName(name);
+        PageInfo<Needs> info=new PageInfo<Needs>(list);
+        List list1=new LinkedList();
+        list1.add(list);
+        list1.add(info);
+        return list1;
+
     }
     @GetMapping("/content/needs/deleteNeeds")
     @ResponseBody

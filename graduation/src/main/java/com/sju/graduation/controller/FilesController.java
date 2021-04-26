@@ -1,6 +1,9 @@
 package com.sju.graduation.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sju.graduation.pojo.FilesLiu;
+import com.sju.graduation.pojo.Log;
 import com.sju.graduation.service.FilesLiuService;
 import com.sju.graduation.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -63,8 +67,15 @@ public class FilesController {
     }
     @RequestMapping("/content/files/findFilesByName")
     @ResponseBody
-    public List<FilesLiu> findFilesByName(String name){
-        return filesLiuService.findFilesByName(name);
+    public List findFilesByName(String name,int pageNum){
+        PageHelper.startPage(pageNum,10);
+        List<FilesLiu> list=filesLiuService.findFilesByName(name);
+        PageInfo<FilesLiu> info=new PageInfo<FilesLiu>(list);
+        List list1=new LinkedList();
+        list1.add(list);
+        list1.add(info);
+        return list1;
+        
     }
     @RequestMapping("/content/files/fileUpload")
     public String fileUpload(@RequestParam("fileName") MultipartFile file, HttpServletRequest request){

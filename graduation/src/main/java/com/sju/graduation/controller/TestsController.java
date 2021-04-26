@@ -1,5 +1,8 @@
 package com.sju.graduation.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.sju.graduation.pojo.Log;
 import com.sju.graduation.pojo.Person;
 import com.sju.graduation.pojo.Test;
 import com.sju.graduation.service.LogService;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -30,8 +34,14 @@ public class TestsController {
     }
     @GetMapping("/content/tests/searchtest")
     @ResponseBody
-    public List<Test> searchtest(String name){
-        return testService.findLikeTest(name);
+    public List searchtest(String name,int pageNum){
+        PageHelper.startPage(pageNum,10);
+        List<Test> list=testService.findLikeTest(name);
+        PageInfo<Test> info=new PageInfo<Test>(list);
+        List list1=new LinkedList();
+        list1.add(list);
+        list1.add(info);
+        return list1;
     }
     @GetMapping("/content/tests/deleteTests")
     @ResponseBody

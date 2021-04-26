@@ -29,6 +29,7 @@ public class LogService {
         logMapper.addLog(log);
     }
     public List<Log> findByPerson(String name){
-        return logMapper.findByPerson(name);
+        String na="%"+name+"%";
+        return logMapper.findByPerson(na);
     }
 }

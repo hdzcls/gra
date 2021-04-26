@@ -29,7 +29,7 @@ public class LogController {
     @GetMapping("/content/log/findAll")
     @ResponseBody
     public List findAll(int pageNum){
-        PageHelper.startPage(pageNum,5);
+        PageHelper.startPage(pageNum,10);
         List<Log> list=logService.findAllLog();
         PageInfo<Log> info=new PageInfo<Log>(list);
         List list1=new LinkedList();
@@ -39,7 +39,13 @@ public class LogController {
     }
     @GetMapping("/content/log/findByPerson")
     @ResponseBody
-    public List<Log> findByPerson(String name){
-        return logService.findByPerson(name);
+    public List<Log> findByPerson(String name,int pageNum){
+        PageHelper.startPage(pageNum,10);
+        List<Log> list=logService.findByPerson(name);
+        PageInfo<Log> info=new PageInfo<Log>(list);
+        List list1=new LinkedList();
+        list1.add(list);
+        list1.add(info);
+        return list1;
     }
 }

@@ -81,7 +81,7 @@
                                     <input type="text" class="form-control" placeholder="输入姓名查找......" ref="getname">
                                     <span class="input-group-btn">
 
-                                            <button class="btn btn-info" type="button" @click="searchdeveloper"><svg
+                                            <button class="btn btn-info" type="button" @click="search(1)"><svg
                                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -138,6 +138,23 @@
                                         </table>
                                     </div>
 
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8"><h3>总页数：{{pageInfo.pageNum}}页</h3></div>
+
+                                    <div class="col-md-4">
+                                        <ul class="pagination">
+                                            <li v-if="pageInfo.pageNum!=1"><a @click="search(1)">首页</a></li>
+                                            <li v-if="pageInfo.pageNum!=1"><a @click="search(pageInfo.pageNum-1)">&laquo;</a></li>
+                                            <li v-if="pageInfo.pages<=5" v-for="count in pageInfo.pages" :class="{'active':count==pageInfo.pageNum}"><a @click="search(count)">{{count}}</a></li>
+                                            <li v-if="pageInfo.pageNum<=3&&pageInfo.pages>5" v-for="count in 5" :class="{'active':count==pageInfo.pageNum}"><a @click="search(count)">{{count}}</a></li>
+                                            <li v-if="pageInfo.pageNum>3&&pageInfo.pages>5&&pageInfo.pageNum<=pageInfo.pages-2" v-for="count in 5" :class="{'active':count+pageInfo.pageNum-3==pageInfo.pageNum}"><a @click="search(count+pageInfo.pageNum-3)">{{count+pageInfo.pageNum-3}}</a></li>
+                                            <li v-if="pageInfo.pages>5&&pageInfo.pageNum>pageInfo.pages-2" v-for="count in 5" :class="{'active':count+pageInfo.pages-5==pageInfo.pageNum}"><a @click="search(count+pageInfo.pages-5)">{{count+pageInfo.pages-5}}</a></li>
+                                            <li v-if="pageInfo.pageNum<pageInfo.pages"><a @click="search(pageInfo.pageNum+1)">&raquo;</a></li>
+                                            <li v-if="pageInfo.pageNum<pageInfo.pages"><a @click="search(pageInfo.pages)">尾页</a></li>
+                                        </ul>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -261,7 +278,8 @@
             list:[],
             back:[],
             getback:[],
-            uid:null
+            uid:null,
+            pageInfo:[]
         },
         methods: {
             findAll: function () {
@@ -312,11 +330,12 @@
                 })
 
             },
-            searchdeveloper: function () {
+            search: function (pageNum) {
                 var name = this.$refs.getname.value;
                 var that=this;
-                axios.get("content/person/searchdeveloper?name=" + name).then(function (response) {
-                    that.msg = response.data;
+                axios.get("content/person/searchdeveloper?name=" + name+"&pageNum="+pageNum).then(function (response) {
+                    that.msg = response.data[0];
+                    that.pageInfo = response.data[1];
 
                 })
 
@@ -325,7 +344,7 @@
 
 
         mounted(){
-            this.findAll();
+            this.search(1);
         }
     })
 </script>

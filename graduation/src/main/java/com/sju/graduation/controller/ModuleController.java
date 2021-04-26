@@ -1,5 +1,8 @@
 package com.sju.graduation.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.sju.graduation.pojo.Log;
 import com.sju.graduation.pojo.Module;
 import com.sju.graduation.pojo.Person;
 import com.sju.graduation.service.LogService;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -40,8 +44,15 @@ public class ModuleController {
     }
     @GetMapping("/content/module/findByName")
     @ResponseBody
-    public List<Module> findByName(String name){
-        return moduleService.findLikeName(name);
+    public List findByName(String name,int pageNum){
+        PageHelper.startPage(pageNum,10);
+        List<Module> list=moduleService.findLikeName(name);
+        PageInfo<Module> info=new PageInfo<Module>(list);
+        List list1=new LinkedList();
+        list1.add(list);
+        list1.add(info);
+        return list1;
+
     }
     @GetMapping("/content/module/findById")
     @ResponseBody

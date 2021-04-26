@@ -13,6 +13,6 @@ public interface LogMapper {
     public List<Log> findAll();
     @Insert("insert into log(date,person,action) values(#{date},#{person},#{action})")
     public void addLog(Log log);
-    @Select("select * from log where person=#{person} order by id desc")
+    @Select("select * from log where person like #{person} order by id desc")
     public List<Log> findByPerson(String person);
 }
