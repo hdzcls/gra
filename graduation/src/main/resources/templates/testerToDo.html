@@ -29,7 +29,7 @@
                         <a href="content/todoTask">个人待办<span class="layui-badge" th:text="${#request.getSession().getAttribute('event')}">0</span></a>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="">个人中心<span class="layui-badge-dot"></span></a>
+                        <a onclick="personal()">个人信息<span class="layui-badge-dot"></span></a>
                     </li>
                     <li class="layui-nav-item" lay-unselect="">
                         <a href="javascript:;" th:text="${#request.getSession().getAttribute('name')}"></a>
@@ -164,6 +164,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
+    <div th:replace="personalMessage::personal"></div>
 
 </div>
 
@@ -174,6 +175,9 @@
 <script src="webjars/vue/2.6.11/vue.min.js"></script>
 <script src="webjars/axios/dist/axios.min.js"></script>
 <script>
+    var personal=function (){
+        $("#personMessage").modal();
+    };
     var cc=false;
     function check() {
         if (cc==false){

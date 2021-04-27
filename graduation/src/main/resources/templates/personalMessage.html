@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:fragment="personal" id="personMessage" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">个人信息</h4>
+            </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label"> 编号:</label>
+                        <input type="text" class="form-control" name="id" required="required" th:value="${session.person?.id}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label"> 姓名:</label>
+                        <input type="text" class="form-control" name="name" required="required" th:value="${session.person?.name}">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">年龄：</label>
+                        <input type="text" class="form-control" name="age"  required="required" th:value="${session.person?.age}">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">电话：</label>
+                        <input type="text" class="form-control" name="phone"  required="required" th:value="${session.person?.phone}">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">登录名：</label>
+                        <input type="text" class="form-control" name="logname"  required="required" th:value="${session.person?.logname}">
+
+                    </div>
+                    <div class="form-group">
+                    <label for="message-text" class="control-label">工作年龄：</label>
+                    <input type="text" class="form-control" name="workage"  required="required" th:value="${session.person?.workage}">
+
+                     </div>
+
+                </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+
+</body>
+</html>
