@@ -22,7 +22,7 @@
             <div class="layui-form component" lay-filter="LAY-site-header-component"></div>
             <div style="float: right">
                 <ul class="layui-nav">
-                    <li class="layui-nav-item">
+                    <li class="layui-nav-item" th:if="${session.person.getRole()==1||session.person.getRole()==2}">
                         <a href="content/todoTask">个人待办<span class="layui-badge"
                                              th:text="${#request.getSession().getAttribute('event')}"></span></a>
                     </li>
@@ -129,7 +129,7 @@
                                                             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
                                                         </svg>&nbsp;下载
                                                     </button>
-                                                    <button class="btn btn-danger"
+                                                    <button th:if="${session.person.getRole()==0||session.person.getRole()==3}" class="btn btn-danger"
                                                             @click="deleteFun(item.id)">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                              fill="currentColor" class="bi bi-file-earmark-minus"

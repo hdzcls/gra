@@ -25,7 +25,7 @@
             <div class="layui-form component" lay-filter="LAY-site-header-component"></div>
             <div style="float: right">
                 <ul class="layui-nav">
-                    <li class="layui-nav-item layui-this">
+                    <li class="layui-nav-item layui-this" th:if="${session.person.getRole()==1||session.person.getRole()==2}">
                         <a href="content/todo">个人待办<span class="layui-badge" th:text="${#request.getSession().getAttribute('event')}">0</span></a>
                     </li>
                     <li class="layui-nav-item">
